@@ -130,8 +130,13 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [ pkgs.kbd ] ++ cfg.packages;
 
-    # Include binary keymap in the initramfs.
-    boot.initrd.contents = [ { source = cfg.binaryKeyMap; } ];
+    # Include binary keymap in the initramfs, and optionally the console font.
+    boot.initrd.contents =
+      [ { source = cfg.binaryKeyMap; } ]
+      ++ lib.optional (cfg.earlySetup && cfg.font != null) {
+        source = "${fontEnv}/share/consolefonts/${cfg.font}";
+        target = "/console-font";
+      };
 
     # Use the device-manager to load the keymap rather
     # than injecting somewhere into the early boot script.
@@ -163,12 +168,6 @@ in
       '';
     };
 
-    boot.initrd.contents = lib.mkIf (cfg.earlySetup && cfg.font != null) [
-      {
-        source = "${fontEnv}/share/consolefonts/${cfg.font}";
-        target = "/console-font";
-      }
-    ];
 
     boot.initrd.fileSystemImportCommands = lib.mkIf (cfg.earlySetup && cfg.font != null) ''
       ${pkgs.kbd}/bin/setfont /console-font -C /dev/console 2>/dev/null || true
