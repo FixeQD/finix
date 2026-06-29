@@ -62,6 +62,7 @@ in
       ./system/activation/switchable-system.nix
       ./system/nixos-compat.nix
       ./system/hm-compat.nix
+      ./system/sops-compat.nix
       ./time
       ./users
       ./xdg
