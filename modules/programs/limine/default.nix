@@ -16,19 +16,7 @@ in
     ./providers.bootloader.nix
   ];
 
-  options.boot.loader.efi = {
-    canTouchEfiVariables = lib.mkOption {
-      default = false;
-      type = lib.types.bool;
-      description = "Whether the installation process is allowed to modify EFI boot variables.";
-    };
-
-    efiSysMountPoint = lib.mkOption {
-      default = "/boot";
-      type = lib.types.str;
-      description = "Where the EFI System Partition is mounted.";
-    };
-  };
+  # NOTE: options.boot.loader.efi.{canTouchEfiVariables,efiSysMountPoint} is already declared in modules/boot/external.nix, which is imported unconditionally via modules/boot/default.nix
 
   options.system.installBootLoader = lib.mkOption {
     internal = true;
