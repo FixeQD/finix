@@ -53,7 +53,10 @@ let
   #
   # Note: The by-id symlinks just use the device name as a placeholder.
   # Real unique IDs would require querying device serial numbers, etc.
-  devDiskScript = pkgs.writeShellScript "mdevd-disk.sh" ''
+  #
+  # writeShellScript is a piece of shit here - hardcodes /nix/store bash, which isn't in the initrd. Use #!/bin/sh instead.
+  devDiskScript = pkgs.writeScript "mdevd-disk.sh" ''
+    #!/bin/sh
     case "$ACTION" in
       add)
         # Create by-id symlink (using device name as placeholder ID)
@@ -110,12 +113,9 @@ let
 
   # Use * prefix to run via /bin/sh on any action (add/remove).
   #
-  # NOTE: this variant references the script via its /nix/store path
-  # It is only usable once /nix/store is actually mounted, i.e. for the post-switch-root hotplug rules
+  # devDiskScript's own /nix/store path *is* present in the initrd, so referencing it directly here works for both the post-switch-root hotplug rules and the initrd coldplug rules. 
+  # What must NOT happen is depending on any *other* /nix/store path from within the script at runtime - see the writeScript/#!/bin/sh note above.
   devDiskRule = "-SUBSYSTEM=block;.* 0:${gidOf "disk"} 660 *${devDiskScript}";
-
-  # Same rule, but pointing at the flattened copy of the script that is placed at /etc/mdevd-disk.sh inside the initrd
-  coldplugDevDiskRule = "-SUBSYSTEM=block;.* 0:${gidOf "disk"} 660 */etc/mdevd-disk.sh";
 in
 {
   options.services.mdevd = {
@@ -187,7 +187,7 @@ in
       coldplugRules = lib.concatLines [
         modaliasRule
         specialRules
-        coldplugDevDiskRule
+        devDiskRule
       ];
     };
 
