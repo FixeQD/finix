@@ -109,7 +109,13 @@ let
   '';
 
   # Use * prefix to run via /bin/sh on any action (add/remove).
+  #
+  # NOTE: this variant references the script via its /nix/store path
+  # It is only usable once /nix/store is actually mounted, i.e. for the post-switch-root hotplug rules
   devDiskRule = "-SUBSYSTEM=block;.* 0:${gidOf "disk"} 660 *${devDiskScript}";
+
+  # Same rule, but pointing at the flattened copy of the script that is placed at /etc/mdevd-disk.sh inside the initrd
+  coldplugDevDiskRule = "-SUBSYSTEM=block;.* 0:${gidOf "disk"} 660 */etc/mdevd-disk.sh";
 in
 {
   options.services.mdevd = {
@@ -181,7 +187,7 @@ in
       coldplugRules = lib.concatLines [
         modaliasRule
         specialRules
-        devDiskRule
+        coldplugDevDiskRule
       ];
     };
 
