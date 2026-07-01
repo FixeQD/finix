@@ -140,6 +140,8 @@ in
         source = pkgs.writeScript "finix-mount-all" ''
           #!/bin/sh
 
+          set -e
+
           targetRoot=/sysroot
 
           ${lib.concatMapStringsSep "\n" mkMount (
