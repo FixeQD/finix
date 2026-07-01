@@ -268,7 +268,7 @@ in
           ''}
 
           run [1] name:switch-root finix-switch-root
-          tty [1] <run/switch-root/failure> @console rescue
+          tty [1] <run/switch-root/failure> @console rescue notty
         '';
       }
       {
