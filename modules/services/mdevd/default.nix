@@ -59,40 +59,41 @@ let
     #!/bin/sh
     case "$ACTION" in
       add)
-        # Create by-id symlink (using device name as placeholder ID)
+        # Create by-id symlink immediately (using device name as placeholder ID) -
+        # cheap, no reason to defer it.
         mkdir -p /dev/disk/by-id
         ln -sf "../../$MDEV" "/dev/disk/by-id/$MDEV"
 
-        # Create by-label, by-uuid, by-partlabel and by-partuuid symlinks
-        # from blkid output. blkid may not have partition data ready
-        # immediately on the uevent, so retry briefly before giving up.
-        info=""
-        for _try in 1 2 3 4 5; do
-          info=$(blkid --output export "/dev/$MDEV" 2>/dev/null)
-          [ -n "$info" ] && break
-          sleep 0.2
-        done
+        # mdevd blocks its whole event loop until this script exits, so the blkid retry wait must run in the background, not foreground.
+        (
+          info=""
+          for _try in 1 2 3 4 5; do
+            info=$(blkid --output export "/dev/$MDEV" 2>/dev/null)
+            [ -n "$info" ] && break
+            sleep 0.2
+          done
 
-        echo "$info" | while IFS='=' read -r key value; do
-          case "$key" in
-            LABEL)
-              mkdir -p /dev/disk/by-label
-              ln -sf "../../$MDEV" "/dev/disk/by-label/$value"
-              ;;
-            UUID)
-              mkdir -p /dev/disk/by-uuid
-              ln -sf "../../$MDEV" "/dev/disk/by-uuid/$value"
-              ;;
-            PARTLABEL)
-              mkdir -p /dev/disk/by-partlabel
-              ln -sf "../../$MDEV" "/dev/disk/by-partlabel/$value"
-              ;;
-            PARTUUID)
-              mkdir -p /dev/disk/by-partuuid
-              ln -sf "../../$MDEV" "/dev/disk/by-partuuid/$value"
-              ;;
-          esac
-        done
+          echo "$info" | while IFS='=' read -r key value; do
+            case "$key" in
+              LABEL)
+                mkdir -p /dev/disk/by-label
+                ln -sf "../../$MDEV" "/dev/disk/by-label/$value"
+                ;;
+              UUID)
+                mkdir -p /dev/disk/by-uuid
+                ln -sf "../../$MDEV" "/dev/disk/by-uuid/$value"
+                ;;
+              PARTLABEL)
+                mkdir -p /dev/disk/by-partlabel
+                ln -sf "../../$MDEV" "/dev/disk/by-partlabel/$value"
+                ;;
+              PARTUUID)
+                mkdir -p /dev/disk/by-partuuid
+                ln -sf "../../$MDEV" "/dev/disk/by-partuuid/$value"
+                ;;
+            esac
+          done
+        ) &
         ;;
       remove)
         # Remove symlinks pointing to this device.
