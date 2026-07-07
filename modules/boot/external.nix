@@ -5,10 +5,13 @@
 }:
 let
   cfg = config.boot.loader.external;
+  inherit (import ../providers/lib.nix { inherit lib; }) mkBackend;
 in
 {
+  imports = [ (mkBackend "bootloader" "external") ];
+
   options.boot.loader.external = {
-    enable = lib.mkEnableOption "an external bootloader install hook";
+    enable = lib.mkEnableOption "an externally-provided bootloader install hook";
 
     installHook = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
@@ -22,10 +25,6 @@ in
         backend automatically.
       '';
     };
-  };
-
-  options.providers.bootloader.backend = lib.mkOption {
-    type = lib.types.enum [ "external" ];
   };
 
   config = lib.mkIf cfg.enable {

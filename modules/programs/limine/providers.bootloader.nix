@@ -35,13 +35,10 @@ let
       fwupdEfiPath = config.services.fwupd.package or null;
     }
   );
+  inherit (import ../../providers/lib.nix { inherit lib; }) mkBackend;
 in
 {
-  options.providers.bootloader = {
-    backend = lib.mkOption {
-      type = lib.types.enum [ "limine" ];
-    };
-  };
+  imports = [ (mkBackend "bootloader" "limine") ];
 
   config = lib.mkIf (config.providers.bootloader.backend == "limine") {
     providers.bootloader.installHook = pkgs.replaceVarsWith {
