@@ -16,7 +16,7 @@ in
     ./providers.bootloader.nix
   ];
 
-  # NOTE: options.boot.loader.efi.{canTouchEfiVariables,efiSysMountPoint} is already declared in modules/boot/external.nix, which is imported unconditionally via modules/boot/default.nix
+  # NOTE: options.boot.loader.efi.{canTouchEfiVariables,efiSysMountPoint} is already declared in modules/boot/efi.nix, which is imported unconditionally via modules/boot/default.nix
 
   options.system.installBootLoader = lib.mkOption {
     internal = true;
@@ -283,17 +283,6 @@ in
           message = "Both UEFI support and BIOS support for Limine are disabled, this will result in an unbootable system";
         }
       ];
-
-      # TODO: move these somewhere more appropriate
-      boot.supportedFilesystems.efivarfs.enable = lib.mkIf config.boot.loader.efi.canTouchEfiVariables true;
-      fileSystems."/sys/firmware/efi/efivars" = lib.mkIf config.boot.loader.efi.canTouchEfiVariables {
-        device = "efivarfs";
-        fsType = "efivarfs";
-        options = [
-          "defaults"
-          "nofail"
-        ];
-      };
 
       programs.limine.settings = {
         graphics = true;
