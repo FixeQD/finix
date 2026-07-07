@@ -22,10 +22,7 @@ let
       else
         ''
           mountpoint -q "$targetRoot${mnt.mountPoint}" || {
-            for _try in $(seq 1 100); do
-              [ -e "${mnt.device}" ] && break
-              sleep 0.1
-            done
+            [ -e "${mnt.device}" ] # let finix-mount-all's outer retry handle waiting
             mount -t ${mnt.fsType} -o ${lib.concatStringsSep "," mnt.options} "${mnt.device}" "$targetRoot${mnt.mountPoint}"
           }
         ''
