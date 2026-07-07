@@ -30,7 +30,10 @@ let
   );
 
   providerModules = builtins.map (value: ./providers/${value}) (
-    builtins.attrNames (builtins.removeAttrs (builtins.readDir ./providers) [ "README.md" ])
+    builtins.attrNames (builtins.removeAttrs (builtins.readDir ./providers) [
+      "README.md"
+      "lib.nix"
+    ])
   );
 in
 {
