@@ -25,7 +25,8 @@ let
     sw:
     let
       device = if sw.label != null then "/dev/disk/by-label/${sw.label}" else sw.device;
-      options = sw.options
+      options =
+        sw.options
         ++ lib.optional (sw.priority != null) "pri=${toString sw.priority}"
         ++ lib.optional (sw.discardPolicy != null) (
           if sw.discardPolicy == "both" then "discard" else "discard=${sw.discardPolicy}"
@@ -118,7 +119,8 @@ let
       value =
         let
           re = sw.randomEncryption;
-          options = sw.options
+          options =
+            sw.options
             ++ lib.optional (sw.priority != null) "pri=${toString sw.priority}"
             ++ lib.optional (sw.discardPolicy != null) (
               if sw.discardPolicy == "both" then "discard" else "discard=${sw.discardPolicy}"
@@ -172,9 +174,7 @@ in
     # environment.systemPackages = with pkgs; [ fuse3 fuse ] ++ config.system.fsPackages;
 
     assertions = lib.map (sw: {
-      assertion =
-         sw.label == null
-         && (builtins.match "/dev/disk/by-(uuid|label)/.*" sw.device == null);
+      assertion = sw.label == null && (builtins.match "/dev/disk/by-(uuid|label)/.*" sw.device == null);
       message = ''
         Random-encrypted swap device ${sw.device} must not use swapDevices.*.label,
         and should not be referenced by UUID or label, since those are erased and regenerated on every
@@ -183,13 +183,15 @@ in
       '';
     }) encryptedSwapDevices;
 
-    environment.systemPackages = lib.unique (
-      lib.flatten (
-        lib.concatMap (v: lib.optional v.enable v.packages or [ ]) (
-          lib.attrValues config.boot.supportedFilesystems
+    environment.systemPackages =
+      lib.unique (
+        lib.flatten (
+          lib.concatMap (v: lib.optional v.enable v.packages or [ ]) (
+            lib.attrValues config.boot.supportedFilesystems
+          )
         )
       )
-    ) ++ lib.optional (encryptedSwapDevices != [ ]) pkgs.cryptsetup;
+      ++ lib.optional (encryptedSwapDevices != [ ]) pkgs.cryptsetup;
 
     finit.tasks = lib.listToAttrs (lib.map makeEncryptedSwapTask encryptedSwapDevices);
 
