@@ -8,11 +8,9 @@
   #     providers.bootloader.backend = "external";
   #     ...
   #   };
-  mkBackend =
-    provider: name:
-    {
-      options.providers.${provider}.backend = lib.mkOption {
-        type = lib.types.enum [ name ];
-      };
+  mkBackend = provider: name: {
+    options.providers.${provider}.backend = lib.mkOption {
+      type = lib.types.enum [ name ];
     };
+  };
 }
