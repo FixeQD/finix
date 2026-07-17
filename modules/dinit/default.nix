@@ -117,29 +117,31 @@ in
       boot = true;
     };
     system.activation.scripts.dinit-reload = {
-          deps = [ "etc" "dinitBootD" ];
-          text = let
-            enabledNames = lib.attrNames (lib.filterAttrs (_: s: s.enable) cfg.services);
-            enabledList = lib.concatStringsSep " " (map (n: "\"${n}\"") enabledNames);
-            dinitctl = "${pkgs.dinit}/bin/dinitctl";
-          in ''
-            # Reload definitions for services in the new config
-            for svc in ${enabledList}; do
-              ${dinitctl} reload "$svc" 2>/dev/null || true
-            done
+      deps = [ "etc" "dinitBootD" ];
+      text = let
+        enabledNames = lib.attrNames (lib.filterAttrs (_: s: s.enable) cfg.services);
+        enabledList = lib.concatStringsSep " " (map (n: "\"${n}\"") enabledNames);
+        enabledAssoc = lib.concatMapStringsSep " " (n: "[\"${n}\"]=1") enabledNames;
+        dinitctl = "${pkgs.dinit}/bin/dinitctl";
+      in ''
+        # Reload definitions for services in the new config
+        for svc in ${enabledList}; do
+          ${dinitctl} reload "$svc" 2>&1 | logger -t finix-dinit || true
+        done
 
-            # Stop services no longer in the config
-            enabled_set="${enabledList}"
-            ${dinitctl} list 2>/dev/null | while IFS= read -r line; do
-            if [[ "$line" =~ ^\[[[:space:]]*\{[+-]\}[[:space:]]*\][[:space:]]+([a-zA-Z0-9_-]+) ]]; then
-                name="''${BASH_REMATCH[1]}"
-                case " $enabled_set " in
-                  *" ''${name} "*) ;;
-                  *) ${dinitctl} stop --no-wait "$name" 2>/dev/null || true ;;
-                esac
-              fi
-            done
-          '';
-        };
+        # Stop services that were enabled in the previous generation but are no longer enabled
+        oldServiceDir="/run/current-system/etc/dinit.d"
+        if [ -d "$oldServiceDir" ]; then
+          declare -A enabled_services=( ${enabledAssoc} )
+          for f in "$oldServiceDir"/*; do
+            [ -e "$f" ] || continue
+            name="$(basename "$f")"
+            if [ -z "''${enabled_services[$name]-}" ]; then
+              ${dinitctl} stop --no-wait "$name" 2>&1 | logger -t finix-dinit || true
+            fi
+          done
+        fi
+      '';
+    };
   };
 }
