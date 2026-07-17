@@ -10,7 +10,7 @@ let
   format = pkgs.formats.keyValue { };
 
   envFormat = pkgs.formats.keyValue {
-    mkKeyValue = k: v: "${k}=${v}";
+    mkKeyValue = k: v: "${k}=${toString v}";
   };
 in
 {
