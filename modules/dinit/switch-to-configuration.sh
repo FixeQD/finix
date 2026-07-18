@@ -2,18 +2,14 @@
 set -euo pipefail
 
 out="@out@"
-localeArchive="@localeArchive@"
 distroId="@distroId@"
 installHook="@installHook@"
 inhibitCheck="@inhibitCheck@"
 logger="@logger@"
 coreutils="@coreutils@"
+utillinux="@utillinux@"
 
 action="${1-}"
-
-# if [[ -n "$localeArchive" ]]; then
-#   export LOCALE_ARCHIVE="$localeArchive"
-# fi
 
 case "$action" in
   switch|boot|test)
@@ -54,7 +50,19 @@ if [[ "$action" != boot && "${NIXOS_NO_CHECK-}" != 1 ]]; then
 fi
 
 # Mount filesystems from fstab (needed for efivars during limine install)
-"$coreutils/bin/mount" -a 2>/dev/null || true
+"$utillinux/bin/mount" -a 2>/dev/null || true
+
+# Ensure the nix profile points to this generation.
+# nixos-rebuild should already have done this via set_profile before calling
+# us, but some nix-env / nixos-rebuild-ng combinations may skip it, leaving
+# the bootloader installer (limine-install.py) unable to find the generation
+# via `nix-env --list-generations`.  We call --set ourselves as a safety net.
+if [[ "$action" == switch || "$action" == boot ]]; then
+  current="$("$coreutils/bin/readlink" -f /nix/var/nix/profiles/system 2>/dev/null || echo "")"
+  if [[ "$current" != "$out" ]] && command -v nix-env >/dev/null 2>&1; then
+    nix-env -p /nix/var/nix/profiles/system --set "$out" || true
+  fi
+fi
 
 # install bootloader
 if [[ "$action" == switch || "$action" == boot ]]; then
