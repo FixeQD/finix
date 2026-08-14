@@ -159,10 +159,12 @@ in
     ./f2fs.nix
     ./fuse.mergerfs.nix
     ./fuse.nix
+    ./iso9660.nix
     ./luks.nix
     ./lvm.nix
     ./ntfs3.nix
     ./special.nix
+    ./squashfs.nix
     ./tmpfs.nix
     ./vfat.nix
     ./xfs.nix
