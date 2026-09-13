@@ -57,7 +57,27 @@ in
     system.activation.scripts.users = ''
       mkdir -p /etc
 
-      ${pkgs.userborn}/bin/userborn ${configFile}
+      # userborn logs using the sd-daemon priority-prefix convention
+      # (e.g. "<6>Created group foo"), which systemd-journald normally
+      # strips and colorizes. finix has no journald, so translate the
+      # prefixes into ANSI colors ourselves instead of leaking them raw.
+      ${pkgs.userborn}/bin/userborn ${configFile} 2>&1 | while IFS= read -r line; do
+        case "$line" in
+          '<'[0-3]'>'*)
+            printf '\e[31m%s\e[0m\n' "''${line#<[0-3]>}"
+            ;;
+          '<4>'*)
+            printf '\e[33m%s\e[0m\n' "''${line#<4>}"
+            ;;
+          '<'[5-7]'>'*)
+            printf '%s\n' "''${line#<[5-7]>}"
+            ;;
+          *)
+            printf '%s\n' "$line"
+            ;;
+        esac
+      done
+      _localstatus=''${PIPESTATUS[0]}
     '';
 
     finit.tmpfiles.rules = [
