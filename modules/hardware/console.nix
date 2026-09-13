@@ -19,6 +19,36 @@ let
         loadkeys --bkeymap "${km}" >$out
       '';
 
+  fontEnv = pkgs.buildEnv {
+    name = "console-fonts";
+    paths = [ pkgs.kbd ] ++ cfg.packages;
+    pathsToLink = [
+      "/share/consolefonts"
+      "/share/kbd/consolefonts"
+    ];
+  };
+
+  setfontCmd =
+    if cfg.font == null then
+      null
+    else
+      let
+        fontArg = lib.escapeShellArg cfg.font;
+        mapArg = lib.optionalString (
+          cfg.keyMap != null
+        ) " -m ${fontEnv}/share/consolefonts/${lib.escapeShellArg cfg.keyMap}.acm 2>/dev/null || true";
+      in
+      "${pkgs.kbd}/bin/setfont ${fontArg} -C /dev/console || ${pkgs.kbd}/bin/setfont ${fontEnv}/share/consolefonts/${fontArg} -C /dev/console${mapArg}";
+
+  colorsScript = lib.optionalString (cfg.colors != [ ]) (
+    let
+      inherit (lib) imap0 concatStringsSep;
+      esc = "\033]P";
+      entries = imap0 (i: c: "${esc}${lib.toHexString i}${c}") cfg.colors;
+    in
+    ''printf "${concatStringsSep "" entries}" > /dev/console''
+  );
+
   loadkmapTask = {
     description = "load console keymap";
     conditions = "dev/console";

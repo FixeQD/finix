@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -11,7 +10,7 @@ in
   options.services.getty = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = false;
       description = ''
         Whether to enable `getty`.
       '';
@@ -58,7 +57,7 @@ in
     environment.etc.issue = lib.mkDefault {
       text = ''
 
-        [1;32m<<< welcome to finix >>>[0m
+        ${"\e"}[1;32m<<< welcome to finix >>>${"\e"}[0m
 
       '';
     };

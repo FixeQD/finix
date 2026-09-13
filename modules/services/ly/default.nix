@@ -10,7 +10,17 @@ let
 
   format = pkgs.formats.keyValue { };
 
-  brightnessctl = config.programs.brightnessctl.package or pkgs.brightnessctl;
+  brightnessctl = config.programs.brightnessctl.package;
+
+  session_rundir =
+    if config.services.sessiond.enable then
+      "session optional ${config.services.sessiond.package}/lib/security/pam_sessiond.so"
+    else if config.services.elogind.enable then
+      "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"
+    else if config.services.seatd.enable then
+      "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"
+    else
+      false;
 in
 {
   options.services.ly = {
@@ -67,8 +77,6 @@ in
 
       restart_cmd = "${config.finit.package}/bin/initctl reboot";
       shutdown_cmd = "${config.finit.package}/bin/initctl poweroff";
-      brightness_up_cmd = lib.mkDefault "${lib.getExe brightnessctl} -q s +10%";
-      brightness_down_cmd = lib.mkDefault "${lib.getExe brightnessctl} -q s 10%-";
     }
     // lib.optionalAttrs (lib.versionAtLeast cfg.package.version "1.5.0") {
       # write to syslog
@@ -82,6 +90,10 @@ in
         else
           (lib.getExe config.programs.xorg.package);
       xsessions = "/run/current-system/sw/share/xsessions";
+    }
+    // lib.optionalAttrs config.programs.brightnessctl.enable or false {
+      brightness_up_cmd = lib.mkDefault "${lib.getExe brightnessctl} -q s +10%";
+      brightness_down_cmd = lib.mkDefault "${lib.getExe brightnessctl} -q s 10%-";
     };
 
     environment.etc."ly/config.ini".source = format.generate "config.ini" cfg.settings;
@@ -103,8 +115,7 @@ in
           session required pam_env.so debug conffile=/etc/security/pam_env.conf readenv=1
           session required pam_unix.so
           session optional pam_loginuid.so
-          ${lib.optionalString config.services.elogind.enable "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"}
-          ${lib.optionalString config.services.seatd.enable "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"}
+          ${lib.optionalString (session_rundir != false) session_rundir}
           session required ${config.security.pam.package}/lib/security/pam_lastlog.so silent
           session required pam_limits.so
         '';

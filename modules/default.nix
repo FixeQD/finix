@@ -8,6 +8,7 @@ let
       "modprobe"
       "plymouth"
       "resolvconf"
+      "sh"
       "shadow"
 
       # deprecated, remove at some point
@@ -26,6 +27,7 @@ let
       "keventd"
       "mdevd"
       "seatd"
+      "sessiond"
       "udev"
     ]
   );
@@ -53,6 +55,7 @@ in
       ./programs/modprobe
       ./programs/plymouth
       ./programs/resolvconf
+      ./programs/sh
       ./programs/shadow
       ./security
       ./services/dbus
@@ -61,6 +64,7 @@ in
       ./services/keventd
       ./services/mdevd
       ./services/seatd
+      ./services/sessiond
       ./services/udev
       ./system/activation
       ./system/activation/specialisation.nix

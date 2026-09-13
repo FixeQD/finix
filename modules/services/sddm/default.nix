@@ -14,6 +14,16 @@ let
   package' = cfg.package.override (prev: {
     extraPackages = prev.extraPackages or [ ] ++ cfg.extraPackages;
   });
+
+  session_rundir =
+    if config.services.sessiond.enable then
+      "session optional ${config.services.sessiond.package}/lib/security/pam_sessiond.so"
+    else if config.services.elogind.enable then
+      "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"
+    else if config.services.seatd.enable then
+      "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"
+    else
+      false;
 in
 {
   imports = [ modules.xorg ];
@@ -166,6 +176,7 @@ in
       conditions = [
         "service/syslogd/ready"
       ]
+      ++ lib.optionals config.services.sessiond.enable [ "service/sessiond/ready" ]
       ++ lib.optionals config.services.elogind.enable [ "service/elogind/ready" ]
       ++ lib.optionals config.services.seatd.enable [ "service/seatd/ready" ];
       command = "/run/current-system/sw/bin/sddm";
@@ -204,8 +215,7 @@ in
         # Session management.
         session  required       pam_succeed_if.so audit quiet_success user = sddm
         session  required       pam_env.so conffile=/etc/security/pam_env.conf readenv=0
-        ${lib.optionalString config.services.elogind.enable "session   optional       ${pkgs.elogind}/lib/security/pam_elogind.so"}
-        ${lib.optionalString config.services.seatd.enable "session   optional       ${pkgs.pam_rundir}/lib/security/pam_rundir.so"}
+        ${lib.optionalString (session_rundir != false) session_rundir}
         session  optional       pam_keyinit.so force revoke
         session  optional       pam_permit.so
         session  required       pam_limits.so
