@@ -94,7 +94,7 @@ in
       type = "forking";
       pidfile = "${runtimeDir}/nvidia-persistenced.pid";
       exec-stop-post = "${lib.getExe pkgs.findutils} ${runtimeDir} -mindepth 1 -delete";
-      restart-max = -1;
+      restart = "always";
     };
 
     finit.tmpfiles.rules = [

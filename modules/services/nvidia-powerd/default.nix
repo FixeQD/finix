@@ -45,7 +45,7 @@ in
       description = "NVIDIA Dynamic Boost";
       command = "${cfg.package.bin}/bin/nvidia-powerd";
       path = [ pkgs.util-linux ]; # nvidia-powerd wants lscpu
-      restart-max = -1;
+      restart = "always";
     };
   };
 }

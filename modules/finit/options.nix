@@ -65,6 +65,7 @@ let
     "pid"
     "restart_sec"
     "supplementary_groups"
+    "norestart"
   ];
 
   # initrd stanzas default to the bootstrap runlevel S
@@ -73,6 +74,29 @@ let
   };
 
   stanzaTitle = name: svc: if svc.id != null && svc.id != "%i" then "${svc.name}:${svc.id}" else name;
+
+  renderStanza = svc:
+    let
+      attrs = lib.removeAttrs svc extensions;
+      restart = attrs.restart or null;
+    in
+    if svc.norestart or false then
+      lib.removeAttrs attrs [ "restart" "restart-max" ] // {
+        restart = "never";
+      }
+    else if lib.isInt restart then
+      lib.removeAttrs attrs [ "restart" "restart-max" ]
+      // (
+        if restart == -1 then
+          { restart = "always"; }
+        else
+          {
+            restart = "true";
+            restart-max = restart;
+          }
+      )
+    else
+      attrs;
 
   baseOpts = { name, config, ... }: {
     freeformType = format.type;
@@ -273,6 +297,36 @@ let
         (lib.mkRenamedOptionModule [ "restart_sec" ] [ "restart-sec" ])
       ];
       options = {
+        restart = lib.mkOption {
+          type =
+            with lib.types;
+            nullOr (oneOf [
+              (enum [ "always" "never" "true" "false" ])
+              (ints.between (-1) 255)
+            ]);
+          default = null;
+          description = ''
+            Restart policy. Use `"always"` for unlimited restarts or `"never"` to disable restarts.
+            Integer values are accepted for compatibility with Finix before Finit v5 and are rendered as `restart-max`.
+          '';
+        };
+
+        restart-max = lib.mkOption {
+          type = with lib.types; nullOr (ints.between 0 255);
+          default = null;
+          description = ''
+            The maximum number of times Finit tries to restart a crashing service.
+          '';
+        };
+
+        norestart = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = ''
+            Compatibility option for the pre-Finit-v5 `norestart` flag.
+          '';
+        };
+
         exec-stop = lib.mkOption {
           type = execType;
           default = null;
@@ -650,7 +704,7 @@ in
           target =
             if svc.id != "%i" then "/etc/finit.d/${name}.conf" else "/etc/finit.d/available/${name}.conf";
           source = format.generate "${name}.conf" {
-            service.${stanzaTitle name svc} = lib.removeAttrs svc extensions;
+            service.${stanzaTitle name svc} = renderStanza svc;
           };
         }) (lib.filterAttrs (_: svc: svc.enable) config.boot.initrd.finit.services);
 
@@ -658,7 +712,7 @@ in
           target =
             if svc.id != "%i" then "/etc/finit.d/${name}.conf" else "/etc/finit.d/available/${name}.conf";
           source = format.generate "${name}.conf" {
-            task.${stanzaTitle name svc} = lib.removeAttrs svc extensions;
+            task.${stanzaTitle name svc} = renderStanza svc;
           };
         }) (lib.filterAttrs (_: svc: svc.enable) config.boot.initrd.finit.tasks);
 
@@ -669,7 +723,7 @@ in
             else
               "/etc/finit.d/available/${lib.fixedWidthNumber 4 svc.priority}-${name}.conf";
           source = format.generate "${name}.conf" {
-            run.${stanzaTitle name svc} = lib.removeAttrs svc extensions;
+            run.${stanzaTitle name svc} = renderStanza svc;
           };
         }) (lib.filterAttrs (_: svc: svc.enable) config.boot.initrd.finit.run);
 
@@ -677,7 +731,7 @@ in
           target =
             if svc.id != "%i" then "/etc/finit.d/${name}.conf" else "/etc/finit.d/available/${name}.conf";
           source = format.generate "${name}.conf" {
-            tty.${stanzaTitle name svc} = lib.removeAttrs svc extensions;
+            tty.${stanzaTitle name svc} = renderStanza svc;
           };
         }) (lib.filterAttrs (_: svc: svc.enable) config.boot.initrd.finit.ttys);
 
@@ -685,7 +739,7 @@ in
           target =
             if svc.id != "%i" then "/etc/finit.d/${name}.conf" else "/etc/finit.d/available/${name}.conf";
           source = format.generate "${name}.conf" {
-            sysv.${stanzaTitle name svc} = lib.removeAttrs svc extensions;
+            sysv.${stanzaTitle name svc} = renderStanza svc;
           };
         }) (lib.filterAttrs (_: svc: svc.enable) config.boot.initrd.finit.sysv);
 
@@ -734,7 +788,7 @@ in
           value.mode = "direct-symlink";
           value.source = format.generate "${name}.conf" (
             {
-              service.${stanzaTitle name svc} = lib.removeAttrs svc extensions;
+              service.${stanzaTitle name svc} = renderStanza svc;
             }
             // lib.optionalAttrs (svc.reload-triggers != [ ]) {
               "# reload-triggers" = lib.concatStringsSep ", " svc.reload-triggers;
@@ -748,7 +802,7 @@ in
           value.mode = "direct-symlink";
           value.source = format.generate "${name}.conf" (
             {
-              task.${stanzaTitle name svc} = lib.removeAttrs svc extensions;
+              task.${stanzaTitle name svc} = renderStanza svc;
             }
             // lib.optionalAttrs (svc.reload-triggers != [ ]) {
               "# reload-triggers" = lib.concatStringsSep ", " svc.reload-triggers;
@@ -766,7 +820,7 @@ in
           value.mode = "direct-symlink";
           value.source = format.generate "${name}.conf" (
             {
-              run.${stanzaTitle name svc} = lib.removeAttrs svc extensions;
+              run.${stanzaTitle name svc} = renderStanza svc;
             }
             // lib.optionalAttrs (svc.reload-triggers != [ ]) {
               "# reload-triggers" = lib.concatStringsSep ", " svc.reload-triggers;
@@ -780,7 +834,7 @@ in
           value.mode = "direct-symlink";
           value.source = format.generate "${name}.conf" (
             {
-              tty.${stanzaTitle name svc} = lib.removeAttrs svc extensions;
+              tty.${stanzaTitle name svc} = renderStanza svc;
             }
             // lib.optionalAttrs (svc.reload-triggers != [ ]) {
               "# reload-triggers" = lib.concatStringsSep ", " svc.reload-triggers;
@@ -794,7 +848,7 @@ in
           value.mode = "direct-symlink";
           value.source = format.generate "${name}.conf" (
             {
-              sysv.${stanzaTitle name svc} = lib.removeAttrs svc extensions;
+              sysv.${stanzaTitle name svc} = renderStanza svc;
             }
             // lib.optionalAttrs (svc.reload-triggers != [ ]) {
               "# reload-triggers" = lib.concatStringsSep ", " svc.reload-triggers;
