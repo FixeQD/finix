@@ -8,6 +8,7 @@
   nodes.server =
     { pkgs, ... }:
     {
+      services.getty.enable = true;
       services.mdevd.enable = true;
 
       # TODO: write a dnsmasq service
@@ -24,6 +25,7 @@
   nodes.client =
     { lib, ... }:
     {
+      services.getty.enable = true;
       services.mdevd.enable = true;
       services.dhcpcd.enable = true;
 
