@@ -9,6 +9,7 @@ inhibitCheck="@inhibitCheck@"
 finit="@finit@"
 logger="@logger@"
 coreutils="@coreutils@"
+flock="@flock@"
 
 action="${1-}"
 
@@ -37,14 +38,14 @@ if [[ ! -f /etc/NIXOS && ! "$(grep -E "^ID=\"?$distroId\"?" /etc/os-release 2>/d
   exit 1
 fi
 
-# mkdir -p -m 755 /run/finix
-# 
-# # Acquire lock
-# exec {lockfd}>/run/finix/switch-to-configuration.lock
-# if ! flock -n "$lockfd"; then
-#   echo "Could not acquire lock" >&2
-#   exit 1
-# fi
+"$coreutils/bin/mkdir" -p -m 755 /run/finix
+
+# Acquire lock
+exec {lockfd}>/run/finix/switch-to-configuration.lock
+if ! "$flock" -n "$lockfd"; then
+  echo "Could not acquire switch-to-configuration lock: another activation is in progress" >&2
+  exit 1
+fi
 
 "$logger/bin/logger" -t finix "starting switch-to-configuration ($action)"
 

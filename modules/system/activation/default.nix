@@ -200,6 +200,7 @@ in
               --subst-var-by finit ${config.finit.package} \
               --subst-var-by logger ${pkgs.util-linuxMinimal} \
               --subst-var-by coreutils ${config.programs.coreutils.package} \
+              --subst-var-by flock ${lib.getExe' pkgs.util-linuxMinimal "flock"} \
               --subst-var-by installHook ${config.providers.bootloader.installHook} \
               --subst-var-by inhibitCheck ${config.system.build.checkSwitchInhibitors}
           ''
