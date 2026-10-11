@@ -4,12 +4,14 @@
   sections ? [ ],
 }:
 let
+  escapeString = lib.replaceStrings [ "\\" "\"" ] [ "\\\\" "\\\"" ];
+
   render =
     value:
     if lib.isBool value then
       lib.boolToString value
     else if lib.isString value then
-      ''"${value}"''
+      ''"${escapeString value}"''
     else if lib.isInt value || lib.isFloat value then
       toString value
     else if lib.isList value then
@@ -26,7 +28,9 @@ let
 
   renderAttr =
     indent: name: value:
-    if lib.isAttrs value && !lib.isDerivation value then
+    if name == "log" && lib.isBool value then
+      if value then renderBlock indent name { } else ""
+    else if lib.isAttrs value && !lib.isDerivation value then
       if lib.elem name sections then
         lib.concatStringsSep "\n" (lib.mapAttrsToList (title: renderBlock indent "${name} ${title}") value)
       else
@@ -37,7 +41,9 @@ let
   renderAttrs =
     indent: attrs:
     lib.concatStringsSep "\n" (
-      lib.mapAttrsToList (renderAttr indent) (lib.filterAttrs (_: v: v != null) attrs)
+      lib.mapAttrsToList (renderAttr indent) (
+        lib.filterAttrs (name: v: v != null && !(name == "log" && v == false)) attrs
+      )
     );
 in
 {

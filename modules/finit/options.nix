@@ -246,7 +246,7 @@ let
       };
 
       log = lib.mkOption {
-        type = with lib.types; nullOr (coercedTo bool (_: { }) (attrsOf format.type));
+        type = with lib.types; nullOr (oneOf [ bool (attrsOf format.type) ]);
         default = null;
         example = {
           file = "/dev/console";
