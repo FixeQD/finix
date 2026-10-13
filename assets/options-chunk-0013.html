@@ -1,0 +1,420 @@
+<div class="option" id="option-users.users._name_.home">
+  <h3 class="option-name">
+    <a href="#option-users.users._name_.home" class="option-anchor">users.users.&lt;name&gt;.home</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The user's home directory.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>absolute path, not containing newlines or colons</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">/var/empty</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/users/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/users/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-users.users._name_.isNormalUser">
+  <h3 class="option-name">
+    <a href="#option-users.users._name_.isNormalUser" class="option-anchor">users.users.&lt;name&gt;.isNormalUser</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Indicates whether this is an account for a “real” user.
+This automatically sets <code class="nixos-option">group</code> to <code>users</code>,
+<code class="nixos-option">createHome</code> to <code>true</code>,
+<code class="nixos-option">home</code> to <code class="file-path">/home/«username»</code><code class="nixos-option">shell</code> to <a class="option-reference" href="options.html#option-users.defaultUserShell"><code class="nixos-option">users.defaultUserShell</code></a>,
+and <code class="nixos-option">isSystemUser</code> to <code>false</code>.
+Exactly one of <code>isNormalUser</code> and <code>isSystemUser</code> must be true.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/users/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/users/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-users.users._name_.isSystemUser">
+  <h3 class="option-name">
+    <a href="#option-users.users._name_.isSystemUser" class="option-anchor">users.users.&lt;name&gt;.isSystemUser</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Indicates if the user is a system user or not. This option
+only has an effect if <code class="nixos-option">uid</code> is
+<code class="nixos-option">null</code>, in which case it determines whether
+the user's UID is allocated in the range for system users
+(below 1000) or in the range for normal users (starting at
+1000).
+Exactly one of <code>isNormalUser</code> and
+<code>isSystemUser</code> must be true.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/users/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/users/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-users.users._name_.name">
+  <h3 class="option-name">
+    <a href="#option-users.users._name_.name" class="option-anchor">users.users.&lt;name&gt;.name</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The name of the user account. If undefined, the name of the
+attribute set will be used.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>string, not containing newlines or colons</code></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/users/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/users/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-users.users._name_.password">
+  <h3 class="option-name">
+    <a href="#option-users.users._name_.password" class="option-anchor">users.users.&lt;name&gt;.password</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Specifies the hashed password for the user.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/users/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/users/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-users.users._name_.passwordFile">
+  <h3 class="option-name">
+    <a href="#option-users.users._name_.passwordFile" class="option-anchor">users.users.&lt;name&gt;.passwordFile</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The full path to a file that contains the hash of the user's
+password. The password file is read on each system activation. The
+file should contain exactly one line, which should be the password in
+an encrypted form that is suitable for the <code>chpasswd -e</code> command.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/users/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/users/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-users.users._name_.shell">
+  <h3 class="option-name">
+    <a href="#option-users.users._name_.shell" class="option-anchor">users.users.&lt;name&gt;.shell</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The path to the user's shell. Can use shell derivations,
+like <code>pkgs.bashInteractive</code>. Don't
+forget to enable your shell in
+<code>programs</code> if necessary,
+like <code>programs.zsh.enable = true;</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or package or (absolute path, not containing newlines or colons)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(171,178,191);">pkgs</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(86,182,194);">shadow</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(171,178,191);">pkgs</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(86,182,194);">bashInteractive</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/users/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/users/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-users.users._name_.uid">
+  <h3 class="option-name">
+    <a href="#option-users.users._name_.uid" class="option-anchor">users.users.&lt;name&gt;.uid</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The account UID. If the UID is null, a free UID is picked on
+activation.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or signed integer</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/users/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/users/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-virtualisation.android.enable">
+  <h3 class="option-name">
+    <a href="#option-virtualisation.android.enable" class="option-anchor">virtualisation.android.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to enable Android container support (Waydroid).</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">true</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/virtualisation/android.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/virtualisation/android.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.autostart.enable">
+  <h3 class="option-name">
+    <a href="#option-xdg.autostart.enable" class="option-anchor">xdg.autostart.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to install files to support the
+<a href="https://specifications.freedesktop.org/autostart-spec/latest">XDG Autostart specification</a>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/nixos/autostart.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/nixos/autostart.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.icons.enable">
+  <h3 class="option-name">
+    <a href="#option-xdg.icons.enable" class="option-anchor">xdg.icons.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>This option has no description.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/xdg/icons.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/xdg/icons.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.mime.enable">
+  <h3 class="option-name">
+    <a href="#option-xdg.mime.enable" class="option-anchor">xdg.mime.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to install files to support the
+<a href="https://specifications.freedesktop.org/shared-mime-info-spec/latest">XDG Shared MIME-info specification</a> and the
+<a href="https://specifications.freedesktop.org/mime-apps-spec/latest">XDG MIME Applications specification</a>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/nixos/mime.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/nixos/mime.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.mime.addedAssociations">
+  <h3 class="option-name">
+    <a href="#option-xdg.mime.addedAssociations" class="option-anchor">xdg.mime.addedAssociations</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Adds associations between mimetypes and applications. See the
+<a href="https://specifications.freedesktop.org/mime-apps-spec/latest/associations">
+specifications</a> for more information.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>attribute set of (string or ((list of string) or string) convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span>&nbsp;<span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">application/pdf</span><span style="color:rgb(152,195,121);">"</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">firefox.desktop</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">text/xml</span><span style="color:rgb(152,195,121);">"</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">nvim.desktop</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">codium.desktop</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">]</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/nixos/mime.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/nixos/mime.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.mime.defaultApplications">
+  <h3 class="option-name">
+    <a href="#option-xdg.mime.defaultApplications" class="option-anchor">xdg.mime.defaultApplications</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Sets the default applications for given mimetypes. See the
+<a href="https://specifications.freedesktop.org/mime-apps-spec/latest/default">
+specifications</a> for more information.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>attribute set of (string or ((list of string) or string) convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span>&nbsp;<span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">application/pdf</span><span style="color:rgb(152,195,121);">"</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">firefox.desktop</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">image/png</span><span style="color:rgb(152,195,121);">"</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">sxiv.desktop</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">gimp.desktop</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">]</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/nixos/mime.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/nixos/mime.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.mime.removedAssociations">
+  <h3 class="option-name">
+    <a href="#option-xdg.mime.removedAssociations" class="option-anchor">xdg.mime.removedAssociations</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Removes associations between mimetypes and applications. See the
+<a href="https://specifications.freedesktop.org/mime-apps-spec/latest/associations">
+specifications</a> for more information.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>attribute set of (string or ((list of string) or string) convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span>&nbsp;<span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">audio/mp3</span><span style="color:rgb(152,195,121);">"</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">mpv.desktop</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">umpv.desktop</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">]</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">inode/directory</span><span style="color:rgb(152,195,121);">"</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">codium.desktop</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/nixos/mime.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/nixos/mime.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.portal.enable">
+  <h3 class="option-name">
+    <a href="#option-xdg.portal.enable" class="option-anchor">xdg.portal.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to enable XDG desktop portals.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/xdg/portal.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/xdg/portal.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.portal.package">
+  <h3 class="option-name">
+    <a href="#option-xdg.portal.package" class="option-anchor">xdg.portal.package</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The package to use for <code>xdg-desktop-portal</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>package</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(171,178,191);">pkgs</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(86,182,194);">xdg-desktop-portal</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/xdg/portal.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/xdg/portal.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.portal.portals">
+  <h3 class="option-name">
+    <a href="#option-xdg.portal.portals" class="option-anchor">xdg.portal.portals</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>List of XDG desktop portal packages to install.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>list of package</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span>&nbsp;<span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/xdg/portal.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/xdg/portal.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.sounds.enable">
+  <h3 class="option-name">
+    <a href="#option-xdg.sounds.enable" class="option-anchor">xdg.sounds.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to install files to support the
+<a href="https://www.freedesktop.org/wiki/Specifications/sound-theme-spec/">XDG Sound Theme specification</a>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/xdg/sounds.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/xdg/sounds.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.terminal-exec.enable">
+  <h3 class="option-name">
+    <a href="#option-xdg.terminal-exec.enable" class="option-anchor">xdg.terminal-exec.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to enable xdg-terminal-exec, the <a href="https://gitlab.freedesktop.org/xdg/xdg-specs/-/merge_requests/46">proposed</a> Default Terminal Execution Specification.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">true</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/nixos/terminal-exec.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/nixos/terminal-exec.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.terminal-exec.package">
+  <h3 class="option-name">
+    <a href="#option-xdg.terminal-exec.package" class="option-anchor">xdg.terminal-exec.package</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The xdg-terminal-exec package to use.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>package</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(171,178,191);">pkgs</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(86,182,194);">xdg-terminal-exec</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/nixos/terminal-exec.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/nixos/terminal-exec.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-xdg.terminal-exec.settings">
+  <h3 class="option-name">
+    <a href="#option-xdg.terminal-exec.settings" class="option-anchor">xdg.terminal-exec.settings</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Configuration options for the Default Terminal Execution Specification.</p>
+<p>The keys are the desktop environments that are matched (case-insensitively) against <code>$XDG_CURRENT_DESKTOP</code>,
+or <code>default</code> which is used when the current desktop environment is not found in the configuration.
+The values are a list of terminals' <a href="https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s02.html#desktop-file-id">desktop file IDs</a> to try in order of decreasing priority.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>attribute set of list of string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span>&nbsp;<span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(86,182,194);">GNOME</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">com.raggesilver.BlackBox.desktop</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">org.gnome.Terminal.desktop</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">]</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;<span style="color:rgb(86,182,194);">default</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">kitty.desktop</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">]</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/nixos/terminal-exec.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/nixos/terminal-exec.nix&gt;</a></code></dd>
+  </dl>
+</div>

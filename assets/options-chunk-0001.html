@@ -1,0 +1,1921 @@
+<div class="option" id="option-boot.initrd.finit.services._name_.runtime-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.services._name_.runtime-dir-mode" class="option-anchor">boot.initrd.finit.services.&lt;name&gt;.runtime-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>runtime-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.services._name_.runtime-dir-preserve">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.services._name_.runtime-dir-preserve" class="option-anchor">boot.initrd.finit.services.&lt;name&gt;.runtime-dir-preserve</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether <code>runtime-dir</code> survives the service stopping, the same values as <code>systemd</code>'s
+<code>RuntimeDirectoryPreserve=</code>, default: <code>false</code>.</p>
+<ul>
+<li><code>false</code> - removed when the service stops</li>
+<li><code>"restart"</code> - kept across restarts, removed on a real stop</li>
+<li><code>true</code> - never removed</li>
+</ul>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or boolean or value "restart" (singular enum)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">restart</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.services._name_.script">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.services._name_.script" class="option-anchor">boot.initrd.finit.services.&lt;name&gt;.script</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Shell commands executed as the main process.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>strings concatenated with "\n"</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.services._name_.state-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.services._name_.state-dir" class="option-anchor">boot.initrd.finit.services.&lt;name&gt;.state-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/var/lib</code>, created before the service starts and owned
+by its <code>user</code> and <code>group</code>. Absolute paths and <code>..</code> are refused. The resolved path is
+exported to the process environment as <code>$STATE_DIRECTORY</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.services._name_.state-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.services._name_.state-dir-mode" class="option-anchor">boot.initrd.finit.services.&lt;name&gt;.state-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>state-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.services._name_.stop-timeout">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.services._name_.stop-timeout" class="option-anchor">boot.initrd.finit.services.&lt;name&gt;.stop-timeout</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The delay in seconds between <code>finit</code> sending a <code>SIGTERM</code> and a <code>SIGKILL</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or integer between 1 and 300 (both inclusive)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">3</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.services._name_.tty">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.services._name_.tty" class="option-anchor">boot.initrd.finit.services.&lt;name&gt;.tty</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Give this stanza a controlling terminal on the given device, connecting its <code>stdin</code>, <code>stdout</code>, and
+<code>stderr</code> to the TTY. May be a device node like <code>/dev/ttyS0</code> or the special keyword <code>@console</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/tty/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">/dev/tty1</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.services._name_.type">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.services._name_.type" class="option-anchor">boot.initrd.finit.services.&lt;name&gt;.type</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Service type. Set to <code>"forking"</code> for traditional daemons that fork
+to the background and use PID files for process tracking.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or value "forking" (singular enum)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.services._name_.user">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.services._name_.user" class="option-anchor">boot.initrd.finit.services.&lt;name&gt;.user</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The user this service should be executed as.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.settings">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.settings" class="option-anchor">boot.initrd.finit.settings</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Freeform top-level <code>finit.conf</code> settings for the initramfs.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>libconfuse value</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span>&nbsp;<span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv" class="option-anchor">boot.initrd.finit.sysv</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>An attribute set of SysV init scripts to be managed by <code>finit</code>. These are
+legacy init scripts that are called with <code>start</code>, <code>stop</code>, and <code>restart</code> arguments.</p>
+<p>See <a href="https://finit-project.github.io/config/sysv/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>attribute set of (open submodule of (libconfuse value))</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span>&nbsp;<span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.enable">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.enable" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to enable this stanza.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">true</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.cache-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.cache-dir" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.cache-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/var/cache</code>, created before the service starts and
+owned by its <code>user</code> and <code>group</code>. Absolute paths and <code>..</code> are refused. The resolved path
+is exported to the process environment as <code>$CACHE_DIRECTORY</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.cache-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.cache-dir-mode" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.cache-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>cache-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.capabilities">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.capabilities" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.capabilities</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Allow services to run with minimal required privileges instead of running as <code>root</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or ((list of non-empty string) or non-empty string convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">^cap_net_bind_service</span><span style="color:rgb(152,195,121);">"</span><br><span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.cgroup">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.cgroup" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.cgroup</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The cgroup to place this process under, keyed by the name of a
+top-level cgroup. <code>delegate</code> hands the subtree over to the service
+itself, for container runtimes like <code>docker</code>, <code>podman</code>,
+<code>systemd-nspawn</code> or <code>lxc</code>; every other key names a <code>cgroup</code> file.</p>
+<p>See <a href="https://finit-project.github.io/config/cgroups/#cgroup-delegation">upstream documentation</a>
+and <a href="https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html">kernel documentation</a>
+for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or (attribute set of attribute set of (boolean or signed integer or string))</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(86,182,194);">system</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(86,182,194);">delegate</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(209,154,102);">true</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">}</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.command">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.command" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.command</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The command to execute.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>main program, path or command</code></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.conditions">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.conditions" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.conditions</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>See <a href="https://finit-project.github.io/conditions/">upstream documentation</a> for details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or ((list of non-empty string) or non-empty string convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">pid/syslog</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.config-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.config-dir" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.config-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/etc</code>, created before the service starts. Absolute
+paths and <code>..</code> are refused. The resolved path is exported to the process environment as
+<code>$CONFIGURATION_DIRECTORY</code>.</p>
+<p>As in <code>systemd</code>, <code>config-dir</code> is the odd one out: it is created but never chowned.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.config-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.config-dir-mode" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.config-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>config-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.conflicts">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.conflicts" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.conflicts</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>If you have conflicting services and want to prevent them from starting.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or ((list of non-empty string) or non-empty string convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.description">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.description" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.description</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A human-readable description of this service, displayed by <code>initctl</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.envfile">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.envfile" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.envfile</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Either a path or a path prefixed with a '-' to indicate a missing file is fine.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or (string or absolute path convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.environment">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.environment" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.environment</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Environment variables passed to this service.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>attribute set of (atom (null, bool, int, float or string))</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span>&nbsp;<span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(86,182,194);">TZ</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">CET</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.exec-cleanup">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.exec-cleanup" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.exec-cleanup</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A script which will be called when the service is removed.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or main program, path or command</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.exec-reload">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.exec-reload" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.exec-reload</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Some services do not support <code>SIGHUP</code> but may have other ways to update the configuration of a running daemon. When
+<code>exec-reload</code> is defined it is preferred over <code>SIGHUP</code>. Like <code>systemd</code>, <code>finit</code> sets ``$MAINPID<code>as a convenience to scripts, which in effect also allow setting</code>exec-reload` to `kill -HUP $MAINPID`.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>exec-reload</code> is called as PID 1, without any timeout! Meaning, it is up to you to ensure the script is not blocking for
+seconds at a time or never terminates.</p>
+</div>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or main program, path or command</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">kill&nbsp;-HUP&nbsp;$MAINPID</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.exec-start-pre">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.exec-start-pre" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.exec-start-pre</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A script which will be called before the service is started.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or main program, path or command</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.exec-start-ready">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.exec-start-ready" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.exec-start-ready</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A script which will be called when the service is ready.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or main program, path or command</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.exec-stop">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.exec-stop" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.exec-stop</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Some services may require alternate methods to be stopped. If <code>exec-stop</code> is defined it is preferred over <code>SIGTERM</code>. Similar
+to <code>exec-reload</code>, <code>finit</code> sets <code>$MAINPID</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>exec-stop</code> is called as PID 1, without any timeout! Meaning, it is up to you to ensure the script is not blocking for
+seconds at a time or never terminates.</p>
+</div>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or main program, path or command</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.exec-stop-post">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.exec-stop-post" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.exec-stop-post</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A script which will be called after the service has stopped.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or main program, path or command</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.extra-groups">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.extra-groups" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.extra-groups</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Explicitly specify supplementary groups, in addition to reading group membership from <code class="file-path">/etc/group</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or (list of string)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.group">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.group" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.group</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The group this service should be executed as.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.id">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.id" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.id</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-metadata"><span class="option-badge">read-only</span></div>
+  <div class="option-description"><html><head></head><body><p>The instance identifier, derived from the attribute name if it contains an <code>@</code> character.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_._if_">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_._if_" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;."if"</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Only register this stanza when the given condition is asserted, or
+when the named service exists. Prefix with <code>!</code> to invert.</p>
+<p>See <a href="https://finit-project.github.io/config/services/">upstream documentation</a> for details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">!int/container</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.log">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.log" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.log</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Redirect <code>stderr</code> and <code>stdout</code> of the application to a file or <code>syslog</code> using the native <code>logit</code>
+tool. This is useful for programs that do not support <code>syslog</code> on their own, which is sometimes
+the case when running in the foreground.</p>
+<p>See <a href="https://finit-project.github.io/config/logging/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>(null or (attribute set of (libconfuse value))) or boolean convertible to it</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(86,182,194);">file</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">/dev/console</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.logs-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.logs-dir" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.logs-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/var/log</code>, created before the service starts and owned
+by its <code>user</code> and <code>group</code>. Absolute paths and <code>..</code> are refused. The resolved path is
+exported to the process environment as <code>$LOGS_DIRECTORY</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.logs-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.logs-dir-mode" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.logs-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>logs-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.manual-start">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.manual-start" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.manual-start</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>If a service should not be automatically started, it can be configured as
+manual. The service can then be started at any time by running <code>initctl start &lt;service&gt;</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.name">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.name" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.name</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-metadata"><span class="option-badge">read-only</span></div>
+  <div class="option-description"><html><head></head><body><p>The name of this stanza, derived from the attribute name.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>string</code></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.nohup">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.nohup" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.nohup</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Set when the service does <em>not</em> handle <code>SIGHUP</code>. Sets
+<code>reload-signal = "none"</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.notify">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.notify" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.notify</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>When null the stanza inherits <code>finit.readiness</code>, cf. <code>service.c</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/service-sync/">upstream documentation</a> for details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or one of "pid", "systemd", "s6", "none"</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.oncrash">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.oncrash" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.oncrash</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><ul>
+<li><code>reboot</code> - when all retries have failed, and the service has crashed, if this option is set the system is rebooted.</li>
+<li><code>script</code> - similarly, but instead of rebooting, call the <code>exec-stop-post</code> script if set.</li>
+</ul>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or one of "reboot", "script"</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.path">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.path" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.path</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Packages added to the <code>PATH</code> environment variable of this service.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>list of (package or string)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span>&nbsp;<span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.pidfile">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.pidfile" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.pidfile</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>See <a href="https://finit-project.github.io/config/services/">upstream documentation</a> for details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.reload-signal">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.reload-signal" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.reload-signal</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Signal <code>finit</code> sends to reload the service, or <code>"none"</code> when the
+service does not handle <code>SIGHUP</code> and must be stopped and started on
+reconfiguration instead.</p>
+<p>See <a href="https://finit-project.github.io/config/services/">upstream documentation</a> for details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">none</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.reload-triggers">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.reload-triggers" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.reload-triggers</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>An arbitrary list of items such as derivations. If any item in the list
+changes between reconfigurations, the service will be reloaded or restarted
+if reloads are not supported.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>list of (string or absolute path)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span>&nbsp;<span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.respawn">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.respawn" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.respawn</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Enable endless restarts without counting toward the retry limit. When set, the service
+will be restarted indefinitely regardless of the <code>restart-max</code> limit.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.restart-max">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.restart-max" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.restart-max</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The number of times <code>finit</code> tries to restart a crashing service. When
+this limit is reached the service is marked crashed and must be restarted
+manually with <code>initctl restart NAME</code>. When <code>null</code>, finit's built-in
+default applies.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or integer between -1 and 255 (both inclusive)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.restart-sec">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.restart-sec" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.restart-sec</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The number of seconds before Finit tries to restart a crashing service, default: <code>2</code>
+seconds for the first five retries, then back-off to <code>5</code> seconds. The maximum of this
+configured value and the above (<code>2</code> and <code>5</code>) will be used.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or (unsigned integer, meaning &gt;=0)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.rlimit">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.rlimit" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.rlimit</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>An attribute set of resource limits that will be apply by <code>finit</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/runlevels/#resource-limits">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or (attribute set of (value "unlimited" (singular enum) or signed integer or (submodule)))</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.runlevel">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.runlevel" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.runlevel</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>See <a href="https://finit-project.github.io/runlevels/">upstream documentation</a> for details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern !?[0-9Ss]+</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.runtime-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.runtime-dir" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.runtime-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/run</code>, created before the service starts and owned by
+its <code>user</code> and <code>group</code>. Absolute paths and <code>..</code> are refused. The resolved path is
+exported to the process environment as <code>$RUNTIME_DIRECTORY</code>.</p>
+<p>Removed again when the service stops, after any <code>exec-stop-post</code> script has run, unless
+<code>runtime-dir-preserve</code> says otherwise.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.runtime-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.runtime-dir-mode" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.runtime-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>runtime-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.runtime-dir-preserve">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.runtime-dir-preserve" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.runtime-dir-preserve</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether <code>runtime-dir</code> survives the service stopping, the same values as <code>systemd</code>'s
+<code>RuntimeDirectoryPreserve=</code>, default: <code>false</code>.</p>
+<ul>
+<li><code>false</code> - removed when the service stops</li>
+<li><code>"restart"</code> - kept across restarts, removed on a real stop</li>
+<li><code>true</code> - never removed</li>
+</ul>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or boolean or value "restart" (singular enum)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">restart</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.script">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.script" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.script</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Shell commands executed as the main process.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>strings concatenated with "\n"</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.state-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.state-dir" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.state-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/var/lib</code>, created before the service starts and owned
+by its <code>user</code> and <code>group</code>. Absolute paths and <code>..</code> are refused. The resolved path is
+exported to the process environment as <code>$STATE_DIRECTORY</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.state-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.state-dir-mode" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.state-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>state-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.stop-timeout">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.stop-timeout" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.stop-timeout</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The delay in seconds between <code>finit</code> sending a <code>SIGTERM</code> and a <code>SIGKILL</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or integer between 1 and 300 (both inclusive)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">3</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.tty">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.tty" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.tty</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Give this stanza a controlling terminal on the given device, connecting its <code>stdin</code>, <code>stdout</code>, and
+<code>stderr</code> to the TTY. May be a device node like <code>/dev/ttyS0</code> or the special keyword <code>@console</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/tty/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">/dev/tty1</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.type">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.type" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.type</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Service type. Set to <code>"forking"</code> for traditional daemons that fork
+to the background and use PID files for process tracking.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or value "forking" (singular enum)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.sysv._name_.user">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.sysv._name_.user" class="option-anchor">boot.initrd.finit.sysv.&lt;name&gt;.user</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The user this service should be executed as.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks" class="option-anchor">boot.initrd.finit.tasks</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>An attribute set of one-shot commands to be executed by <code>finit</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/task-and-run/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>attribute set of (open submodule of (libconfuse value))</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span>&nbsp;<span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.enable">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.enable" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to enable this stanza.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">true</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.cache-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.cache-dir" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.cache-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/var/cache</code>, created before the service starts and
+owned by its <code>user</code> and <code>group</code>. Absolute paths and <code>..</code> are refused. The resolved path
+is exported to the process environment as <code>$CACHE_DIRECTORY</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.cache-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.cache-dir-mode" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.cache-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>cache-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.capabilities">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.capabilities" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.capabilities</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Allow services to run with minimal required privileges instead of running as <code>root</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or ((list of non-empty string) or non-empty string convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">^cap_net_bind_service</span><span style="color:rgb(152,195,121);">"</span><br><span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.cgroup">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.cgroup" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.cgroup</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The cgroup to place this process under, keyed by the name of a
+top-level cgroup. <code>delegate</code> hands the subtree over to the service
+itself, for container runtimes like <code>docker</code>, <code>podman</code>,
+<code>systemd-nspawn</code> or <code>lxc</code>; every other key names a <code>cgroup</code> file.</p>
+<p>See <a href="https://finit-project.github.io/config/cgroups/#cgroup-delegation">upstream documentation</a>
+and <a href="https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html">kernel documentation</a>
+for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or (attribute set of attribute set of (boolean or signed integer or string))</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(86,182,194);">system</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(86,182,194);">delegate</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(209,154,102);">true</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">}</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.command">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.command" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.command</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The command to execute.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>main program, path or command</code></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.conditions">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.conditions" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.conditions</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>See <a href="https://finit-project.github.io/conditions/">upstream documentation</a> for details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or ((list of non-empty string) or non-empty string convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">pid/syslog</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.config-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.config-dir" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.config-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/etc</code>, created before the service starts. Absolute
+paths and <code>..</code> are refused. The resolved path is exported to the process environment as
+<code>$CONFIGURATION_DIRECTORY</code>.</p>
+<p>As in <code>systemd</code>, <code>config-dir</code> is the odd one out: it is created but never chowned.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.config-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.config-dir-mode" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.config-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>config-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.conflicts">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.conflicts" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.conflicts</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>If you have conflicting services and want to prevent them from starting.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or ((list of non-empty string) or non-empty string convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.description">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.description" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.description</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A human-readable description of this service, displayed by <code>initctl</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.envfile">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.envfile" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.envfile</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Either a path or a path prefixed with a '-' to indicate a missing file is fine.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or (string or absolute path convertible to it)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.environment">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.environment" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.environment</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Environment variables passed to this service.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>attribute set of (atom (null, bool, int, float or string))</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span>&nbsp;<span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(86,182,194);">TZ</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">CET</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.exec-cleanup">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.exec-cleanup" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.exec-cleanup</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A script which will be called when the service is removed.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or main program, path or command</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.exec-start-pre">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.exec-start-pre" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.exec-start-pre</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A script which will be called before the service is started.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or main program, path or command</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.exec-stop-post">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.exec-stop-post" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.exec-stop-post</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A script which will be called after the service has stopped.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or main program, path or command</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.extra-groups">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.extra-groups" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.extra-groups</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Explicitly specify supplementary groups, in addition to reading group membership from <code class="file-path">/etc/group</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or (list of string)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.group">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.group" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.group</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The group this service should be executed as.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.id">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.id" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.id</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-metadata"><span class="option-badge">read-only</span></div>
+  <div class="option-description"><html><head></head><body><p>The instance identifier, derived from the attribute name if it contains an <code>@</code> character.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_._if_">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_._if_" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;."if"</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Only register this stanza when the given condition is asserted, or
+when the named service exists. Prefix with <code>!</code> to invert.</p>
+<p>See <a href="https://finit-project.github.io/config/services/">upstream documentation</a> for details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">!int/container</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.log">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.log" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.log</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Redirect <code>stderr</code> and <code>stdout</code> of the application to a file or <code>syslog</code> using the native <code>logit</code>
+tool. This is useful for programs that do not support <code>syslog</code> on their own, which is sometimes
+the case when running in the foreground.</p>
+<p>See <a href="https://finit-project.github.io/config/logging/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>(null or (attribute set of (libconfuse value))) or boolean convertible to it</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(86,182,194);">file</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">/dev/console</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.logs-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.logs-dir" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.logs-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/var/log</code>, created before the service starts and owned
+by its <code>user</code> and <code>group</code>. Absolute paths and <code>..</code> are refused. The resolved path is
+exported to the process environment as <code>$LOGS_DIRECTORY</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.logs-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.logs-dir-mode" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.logs-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>logs-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.manual-start">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.manual-start" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.manual-start</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>If a service should not be automatically started, it can be configured as
+manual. The service can then be started at any time by running <code>initctl start &lt;service&gt;</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.name">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.name" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.name</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-metadata"><span class="option-badge">read-only</span></div>
+  <div class="option-description"><html><head></head><body><p>The name of this stanza, derived from the attribute name.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>string</code></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.path">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.path" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.path</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Packages added to the <code>PATH</code> environment variable of this service.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>list of (package or string)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span>&nbsp;<span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.reload-triggers">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.reload-triggers" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.reload-triggers</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>An arbitrary list of items such as derivations. If any item in the list
+changes between reconfigurations, the service will be reloaded or restarted
+if reloads are not supported.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>list of (string or absolute path)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span>&nbsp;<span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.remain-after-exit">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.remain-after-exit" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.remain-after-exit</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>By default, a <code>run</code> or <code>task</code> will re-run each time its runlevel is
+entered, and its <code>exec-stop-post</code> script does not run on completion.</p>
+<p>With <code>remain-after-exit</code>, the task runs once and does not re-run on runlevel.
+The <code>exec-stop-post</code> script will run if the task is explicitly stopped or when
+the task leaves its valid runlevels.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.respawn">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.respawn" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.respawn</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Enable endless restarts without counting toward the retry limit. When set, the service
+will be restarted indefinitely regardless of the <code>restart-max</code> limit.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.restart-max">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.restart-max" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.restart-max</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The number of times <code>finit</code> tries to restart a crashing service. When
+this limit is reached the service is marked crashed and must be restarted
+manually with <code>initctl restart NAME</code>. When <code>null</code>, finit's built-in
+default applies.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or integer between -1 and 255 (both inclusive)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.restart-sec">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.restart-sec" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.restart-sec</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The number of seconds before Finit tries to restart a crashing service, default: <code>2</code>
+seconds for the first five retries, then back-off to <code>5</code> seconds. The maximum of this
+configured value and the above (<code>2</code> and <code>5</code>) will be used.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or (unsigned integer, meaning &gt;=0)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.rlimit">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.rlimit" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.rlimit</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>An attribute set of resource limits that will be apply by <code>finit</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/runlevels/#resource-limits">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or (attribute set of (value "unlimited" (singular enum) or signed integer or (submodule)))</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.runlevel">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.runlevel" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.runlevel</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>See <a href="https://finit-project.github.io/runlevels/">upstream documentation</a> for details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern !?[0-9Ss]+</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.runtime-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.runtime-dir" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.runtime-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/run</code>, created before the service starts and owned by
+its <code>user</code> and <code>group</code>. Absolute paths and <code>..</code> are refused. The resolved path is
+exported to the process environment as <code>$RUNTIME_DIRECTORY</code>.</p>
+<p>Removed again when the service stops, after any <code>exec-stop-post</code> script has run, unless
+<code>runtime-dir-preserve</code> says otherwise.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.runtime-dir-mode">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.runtime-dir-mode" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.runtime-dir-mode</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The mode of <code>runtime-dir</code>, locked down again on every start, default: <code>0755</code>. Modes are
+octal, with the leading zero.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string matching the pattern 0[0-7]{3,4}</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">0700</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.runtime-dir-preserve">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.runtime-dir-preserve" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.runtime-dir-preserve</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether <code>runtime-dir</code> survives the service stopping, the same values as <code>systemd</code>'s
+<code>RuntimeDirectoryPreserve=</code>, default: <code>false</code>.</p>
+<ul>
+<li><code>false</code> - removed when the service stops</li>
+<li><code>"restart"</code> - kept across restarts, removed on a real stop</li>
+<li><code>true</code> - never removed</li>
+</ul>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or boolean or value "restart" (singular enum)</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">restart</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.script">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.script" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.script</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Shell commands executed as the main process.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>strings concatenated with "\n"</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-boot.initrd.finit.tasks._name_.state-dir">
+  <h3 class="option-name">
+    <a href="#option-boot.initrd.finit.tasks._name_.state-dir" class="option-anchor">boot.initrd.finit.tasks.&lt;name&gt;.state-dir</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>A directory name, resolved under <code>/var/lib</code>, created before the service starts and owned
+by its <code>user</code> and <code>group</code>. Absolute paths and <code>..</code> are refused. The resolved path is
+exported to the process environment as <code>$STATE_DIRECTORY</code>.</p>
+<p>See <a href="https://finit-project.github.io/config/service-opts/">upstream documentation</a> for additional details.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or non-empty string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">myservice</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/finit/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/finit/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
