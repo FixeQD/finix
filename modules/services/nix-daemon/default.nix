@@ -98,6 +98,17 @@ in
       '';
     };
 
+    env = lib.mkOption {
+      type = with lib.types; attrsOf str;
+      default = { };
+      example = {
+        MY_VAR = "value";
+      };
+      description = ''
+        Additional environment variables passed to the `nix-daemon` service in addition to the default `CURL_CA_BUNDLE`.
+      '';
+    };
+
     settings = lib.mkOption {
       type = lib.types.submodule {
         freeformType = configType;
@@ -285,7 +296,9 @@ in
       command = "${cfg.package}/bin/nix-daemon --daemon";
       reload-signal = "none";
 
-      environment.CURL_CA_BUNDLE = config.security.pki.caBundle;
+      environment = cfg.env // {
+        CURL_CA_BUNDLE = config.security.pki.caBundle;
+      };
 
       # https://github.com/NixOS/nix/blob/81884c36a381737a438ddc5decb658446074d064/misc/systemd/nix-daemon.service.in#L12-L13
       cgroup.system."pids.max" = 1048576;
