@@ -14,8 +14,7 @@ in
 
   nodes.machine =
     { ... }:
-    {
-      imports = map (part: part.nodes.machine) parts;
+    { imports = map (part: part.nodes.machine) parts;
 
       services.getty.enable = true;
       services.mdevd.enable = true;
