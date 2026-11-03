@@ -1,0 +1,125 @@
+name: "nix fmt suggestion"
+
+# When a PR is approved and `nix fmt` would change files post a comment with the affected files and the diff
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: fmt-suggest-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  suggest:
+    # Fork PRs get a read-only token and can't be pushed to by the bot.
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (github.event_name == 'pull_request' || github.event.review.state == 'approved')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Run nix fmt
+        id: fmt
+        run: |
+          nix fmt
+          git diff --name-only > "$RUNNER_TEMP/fmt-files.txt"
+          git diff > "$RUNNER_TEMP/fmt.diff"
+          if [ -s "$RUNNER_TEMP/fmt-files.txt" ]; then
+            echo "dirty=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "dirty=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Sync comment
+        uses: actions/github-script@v7
+        env:
+          DIRTY: ${{ steps.fmt.outputs.dirty }}
+        with:
+          script: |
+            const fs = require('fs');
+            const {owner, repo} = context.repo;
+            const pr = context.payload.pull_request;
+            const sha = pr.head.sha;
+            const pendingPrefix = '<!-- finix-nixfmt sha=';
+            const marker = `${pendingPrefix}${sha} -->`;
+
+            const reviews = await github.paginate(github.rest.pulls.listReviews, {
+              owner, repo, pull_number: pr.number,
+            });
+            const latest = new Map();
+            for (const r of reviews) {
+              if (['APPROVED', 'CHANGES_REQUESTED', 'DISMISSED'].includes(r.state)) {
+                latest.set(r.user.login, r.state);
+              }
+            }
+            const states = [...latest.values()];
+            const approved = states.includes('APPROVED') && !states.includes('CHANGES_REQUESTED');
+            const dirty = process.env.DIRTY === 'true';
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number: pr.number,
+            });
+            const pending = comments.filter(c =>
+              c.user.login === 'github-actions[bot]' && c.body.startsWith(pendingPrefix));
+
+            if (!dirty || !approved) {
+              for (const c of pending) {
+                await github.rest.issues.deleteComment({owner, repo, comment_id: c.id});
+              }
+              return;
+            }
+
+            if (pending.some(c => c.body.startsWith(marker))) return;
+
+            // Stale comments belong to an older commit, their 👍 must not apply.
+            for (const c of pending) {
+              await github.rest.issues.deleteComment({owner, repo, comment_id: c.id});
+            }
+
+            const tmp = process.env.RUNNER_TEMP;
+            const files = fs.readFileSync(`${tmp}/fmt-files.txt`, 'utf8').trim().split('\n');
+            let diff = fs.readFileSync(`${tmp}/fmt.diff`, 'utf8');
+            const MAX = 50000;
+            let truncated = '';
+            if (diff.length > MAX) {
+              diff = diff.slice(0, MAX);
+              truncated = '\n\n_Diff truncated, run `nix fmt` to see the rest._';
+            }
+
+            const body = [
+              marker,
+              '### `nix fmt` check failed',
+              '',
+              `This pull request is approved, but ${files.length} file(s) are not formatted:`,
+              '',
+              ...files.map(f => `- \`${f}\``),
+              '',
+              '<details>',
+              '<summary>Diff to fix it</summary>',
+              '',
+              '````diff',
+              diff.trimEnd(),
+              '````',
+              truncated,
+              '</details>',
+              '',
+              'React with 👍 on this comment and the bot will run `nix fmt` and push the fix to this branch (checked every ~5 minutes). Or run `nix fmt` locally.',
+              '<h6>Only users with write access (and the PR author) can trigger this.</h6>',
+            ].join('\n');
+
+            const {data: created} = await github.rest.issues.createComment({
+              owner, repo, issue_number: pr.number, body,
+            });
+            await github.rest.reactions.createForIssueComment({
+              owner, repo, comment_id: created.id, content: '+1',
+            });

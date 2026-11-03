@@ -1,0 +1,127 @@
+name: "nix fmt apply"
+
+# GitHub has no workflow trigger for reactions btw so poll
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: fmt-apply
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+    outputs:
+      prs: ${{ steps.scan.outputs.prs }}
+    steps:
+      - id: scan
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const sleep = ms => new Promise(r => setTimeout(r, ms));
+            const writers = ['admin', 'maintain', 'write'];
+
+            // Pending suggestion comments on open same-repo PRs.
+            const prs = await github.paginate(github.rest.pulls.list, {
+              owner, repo, state: 'open',
+            });
+            const watched = [];
+            for (const pr of prs) {
+              if (pr.head.repo.full_name !== `${owner}/${repo}`) continue;
+              const comments = await github.paginate(github.rest.issues.listComments, {
+                owner, repo, issue_number: pr.number,
+              });
+              const marker = `<!-- finix-nixfmt sha=${pr.head.sha} -->`;
+              const c = comments.find(c =>
+                c.user.login === 'github-actions[bot]' && c.body.startsWith(marker));
+              if (c) watched.push({pr, comment: c});
+            }
+
+            const permCache = new Map();
+            const isWriter = async login => {
+              if (!permCache.has(login)) {
+                const {data} = await github.rest.repos.getCollaboratorPermissionLevel({
+                  owner, repo, username: login,
+                });
+                permCache.set(login, writers.includes(data.permission) || writers.includes(data.role_name));
+              }
+              return permCache.get(login);
+            };
+
+            // Nothing pending: exit at once. Otherwise poll reactions every 30s until the next cron run takes over.
+            const ready = [];
+            const deadline = Date.now() + 4.5 * 60 * 1000;
+            while (true) {
+              for (const {pr, comment} of watched) {
+                if (ready.some(x => x.number === pr.number)) continue;
+                const reactions = await github.paginate(github.rest.reactions.listForIssueComment, {
+                  owner, repo, comment_id: comment.id,
+                });
+                for (const r of reactions) {
+                  if (r.content !== '+1' || r.user.type === 'Bot') continue;
+                  if (r.user.login === pr.user.login || await isWriter(r.user.login)) {
+                    ready.push({number: pr.number, branch: pr.head.ref, sha: pr.head.sha, comment_id: comment.id});
+                    break;
+                  }
+                }
+              }
+              if (ready.length || !watched.length || Date.now() + 30000 > deadline) break;
+              await sleep(30000);
+            }
+            core.setOutput('prs', JSON.stringify(ready));
+
+  fix:
+    needs: scan
+    if: needs.scan.outputs.prs != '[]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include: ${{ fromJSON(needs.scan.outputs.prs) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.sha }}
+          token: ${{ secrets.FMT_PUSH_TOKEN || github.token }}
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Format and push
+        id: push
+        env:
+          BRANCH: ${{ matrix.branch }}
+        run: |
+          nix fmt
+          if git diff --quiet; then
+            echo "nothing to format"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -am "nix fmt"
+            git push origin "HEAD:refs/heads/$BRANCH"
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Mark comment as done
+        uses: actions/github-script@v7
+        env:
+          COMMENT_ID: ${{ matrix.comment_id }}
+          NEW_SHA: ${{ steps.push.outputs.sha }}
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            await github.rest.issues.updateComment({
+              owner, repo,
+              comment_id: Number(process.env.COMMENT_ID),
+              body: `<!-- finix-nixfmt state=done -->\n### \`nix fmt\` applied\n\nFormatted and pushed in ${process.env.NEW_SHA}.`,
+            });
