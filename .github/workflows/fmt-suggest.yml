@@ -25,7 +25,7 @@ jobs:
       (github.event_name == 'pull_request' || github.event.review.state == 'approved')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: DeterminateSystems/nix-installer-action@main
@@ -41,7 +41,7 @@ jobs:
             echo "dirty=false" >> "$GITHUB_OUTPUT"
           fi
       - name: Sync comment
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           DIRTY: ${{ steps.fmt.outputs.dirty }}
         with:
