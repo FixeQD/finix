@@ -1,0 +1,149 @@
+name: "nix fmt apply"
+
+# Ticking the checkbox in the bot's "nix fmt check failed" comment edits that comment which fires issue_comment/edited
+on:
+  issue_comment:
+    types: [edited]
+
+concurrency:
+  group: fmt-apply-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  check:
+    if: >-
+      github.event.issue.pull_request &&
+      github.event.comment.user.login == 'github-actions[bot]' &&
+      startsWith(github.event.comment.body, '<!-- finix-nixfmt sha=')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      run: ${{ steps.gate.outputs.run }}
+      sha: ${{ steps.gate.outputs.sha }}
+      branch: ${{ steps.gate.outputs.branch }}
+    steps:
+      - id: gate
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const comment = context.payload.comment;
+            const before = context.payload.changes?.body?.from ?? '';
+
+            // This edit must be the one that ticked the box.
+            const unchecked = /^- \[ \] Apply `nix fmt`/m;
+            const checked = /^- \[[xX]\] Apply `nix fmt`/m;
+            if (!unchecked.test(before) || !checked.test(comment.body)) {
+              core.info('This edit did not tick the checkbox');
+              return;
+            }
+
+            // Only people with write access can trigger a push.
+            const sender = context.payload.sender.login;
+            const {data: perm} = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner, repo, username: sender,
+            });
+            const writers = ['admin', 'maintain', 'write'];
+            if (!writers.includes(perm.permission) && !writers.includes(perm.role_name)) {
+              core.warning(`${sender} has no write access, ignoring`);
+              return;
+            }
+
+            const sha = comment.body.match(/^<!-- finix-nixfmt sha=([0-9a-f]{40}) -->/)?.[1];
+            if (!sha) {
+              core.warning('No sha found in the comment marker');
+              return;
+            }
+
+            const {data: pr} = await github.rest.pulls.get({
+              owner, repo, pull_number: context.payload.issue.number,
+            });
+            if (pr.state !== 'open' || pr.head.repo.full_name !== `${owner}/${repo}`) {
+              core.warning('PR is closed or comes from a fork');
+              return;
+            }
+            // The comment belongs to an older commit, a newer run will replace it
+            if (pr.head.sha !== sha) {
+              core.warning(`Comment is for ${sha} but the PR head is ${pr.head.sha}`);
+              return;
+            }
+
+            core.setOutput('run', 'true');
+            core.setOutput('sha', sha);
+            core.setOutput('branch', pr.head.ref);
+
+  fix:
+    needs: check
+    if: needs.check.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Mark comment as running
+        uses: actions/github-script@v7
+        env:
+          COMMENT_ID: ${{ github.event.comment.id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            await github.rest.issues.updateComment({
+              owner, repo,
+              comment_id: Number(process.env.COMMENT_ID),
+              body: `<!-- finix-nixfmt state=running -->\n### \`nix fmt\` running\n\nFormatting this branch, the result will be pushed in a moment. [Workflow run](${process.env.RUN_URL})`,
+            });
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.check.outputs.sha }}
+          token: ${{ secrets.FMT_PUSH_TOKEN || github.token }}
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Format and push
+        id: push
+        env:
+          BRANCH: ${{ needs.check.outputs.branch }}
+        run: |
+          nix fmt
+          if git diff --quiet; then
+            echo "nothing to format"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -am "nix fmt"
+            git push origin "HEAD:refs/heads/$BRANCH"
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Mark comment as done
+        uses: actions/github-script@v7
+        env:
+          COMMENT_ID: ${{ github.event.comment.id }}
+          NEW_SHA: ${{ steps.push.outputs.sha }}
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            await github.rest.issues.updateComment({
+              owner, repo,
+              comment_id: Number(process.env.COMMENT_ID),
+              body: `<!-- finix-nixfmt state=done -->\n### \`nix fmt\` applied\n\nFormatted and pushed in ${process.env.NEW_SHA}.`,
+            });
+      - name: Untick the box on failure
+        if: failure()
+        uses: actions/github-script@v7
+        env:
+          COMMENT_ID: ${{ github.event.comment.id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const comment_id = Number(process.env.COMMENT_ID);
+            // The comment is "running" by now so rebuild it from the version that was ticked
+            const body = context.payload.comment.body
+              .replace(/\n\n:x: Applying failed.*$/s, '')
+              .replace(/^- \[[xX]\] Apply/m, '- [ ] Apply');
+            await github.rest.issues.updateComment({
+              owner, repo, comment_id,
+              body: `${body}\n\n:x: Applying failed, see ${process.env.RUN_URL}. Tick the box to retry.`,
+            });
