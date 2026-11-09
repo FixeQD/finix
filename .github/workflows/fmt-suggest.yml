@@ -1,12 +1,10 @@
 name: "nix fmt suggestion"
 
-# When a PR is approved and `nix fmt` would change files post a comment with the affected files and the diff
+# When an approved PR touches .nix files and `nix fmt` would change files post a comment with the affected files and the diff
 
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
-    paths:
-      - '**.nix'
   pull_request_review:
     types: [submitted]
 
@@ -27,12 +25,32 @@ jobs:
       (github.event_name == 'pull_request' || github.event.review.state == 'approved')
     runs-on: ubuntu-latest
     steps:
+      - name: Detect nix changes
+        id: scope
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              per_page: 100,
+            });
+            const isNix = name => (name ?? '').endsWith('.nix');
+            const nix = files.some(f => isNix(f.filename) || isNix(f.previous_filename));
+            core.info(nix ? 'PR touches .nix files' : 'PR does not touch .nix files');
+            core.setOutput('nix', String(nix));
       - uses: actions/checkout@v7
+        if: steps.scope.outputs.nix == 'true'
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          # nix fmt runs code from the PR, keep the token away from it
+          persist-credentials: false
       - uses: DeterminateSystems/nix-installer-action@main
+        if: steps.scope.outputs.nix == 'true'
       - name: Run nix fmt
         id: fmt
+        if: steps.scope.outputs.nix == 'true'
         run: |
           nix fmt
           git diff --name-only > "$RUNNER_TEMP/fmt-files.txt"
@@ -45,7 +63,7 @@ jobs:
       - name: Sync comment
         uses: actions/github-script@v9
         env:
-          DIRTY: ${{ steps.fmt.outputs.dirty }}
+          DIRTY: ${{ steps.fmt.outputs.dirty || 'false' }}
         with:
           script: |
             const fs = require('fs');
