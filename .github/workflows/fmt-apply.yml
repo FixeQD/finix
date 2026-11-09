@@ -25,7 +25,7 @@ jobs:
       branch: ${{ steps.gate.outputs.branch }}
     steps:
       - id: gate
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const {owner, repo} = context.repo;
@@ -84,7 +84,7 @@ jobs:
       issues: write
     steps:
       - name: Mark comment as running
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           COMMENT_ID: ${{ github.event.comment.id }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -96,7 +96,7 @@ jobs:
               comment_id: Number(process.env.COMMENT_ID),
               body: `<!-- finix-nixfmt state=running -->\n### \`nix fmt\` running\n\nFormatting this branch, the result will be pushed in a moment. [Workflow run](${process.env.RUN_URL})`,
             });
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.check.outputs.sha }}
           token: ${{ secrets.FMT_PUSH_TOKEN || github.token }}
@@ -117,7 +117,7 @@ jobs:
           fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Mark comment as done
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           COMMENT_ID: ${{ github.event.comment.id }}
           NEW_SHA: ${{ steps.push.outputs.sha }}
@@ -131,7 +131,7 @@ jobs:
             });
       - name: Untick the box on failure
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           COMMENT_ID: ${{ github.event.comment.id }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
